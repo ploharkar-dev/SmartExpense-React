@@ -36,7 +36,13 @@ export default function Register() {
     setIsLoading(true);
 
     try {
-      await apiService.auth.register(username, email, password, { gender });
+      await apiService.auth.register(username, email, password, {
+        gender,
+        currency: 'INR',
+        monthlyBudget: '10000',
+        notifications: 'Enabled',
+        darkMode: 'Light'
+      });
       showToast('Registration successful!', 'success');
       navigate('/login');
     } catch (err: any) {

@@ -40,7 +40,7 @@ export default function Transactions() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
-  const currency = user?.properties?.currency || 'USD';
+  const currency = user?.properties?.currency || 'INR';
   const currencySymbol = currency === 'INR' ? '₹' : '$';
   
   // Form State
@@ -197,7 +197,7 @@ export default function Transactions() {
       </div>
 
       {/* Category Pills */}
-      <div className="flex gap-2 overflow-x-auto pb-2 px-1 scrollbar-hide no-scrollbar">
+      <div className="flex gap-2 overflow-x-auto pb-2 px-1 scrollbar-hide no-scrollbar [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 dark:[&::-webkit-scrollbar-thumb]:bg-slate-800 [&::-webkit-scrollbar-track]:bg-transparent">
         <button
           onClick={() => setSelectedCategory(null)}
           className={cn(

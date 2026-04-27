@@ -26,7 +26,7 @@ export default function Predictions() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const currency = user?.properties?.currency || 'USD';
+  const currency = user?.properties?.currency || 'INR';
   const currencySymbol = currency === 'INR' ? '₹' : '$';
 
   const loadPredictions = useCallback(async () => {

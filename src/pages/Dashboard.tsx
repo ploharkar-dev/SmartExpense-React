@@ -38,7 +38,7 @@ export default function Dashboard() {
   const [recentTxns, setRecentTxns] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const currency = user?.properties?.currency || 'USD';
+  const currency = user?.properties?.currency || 'INR';
   const currencySymbol = currency === 'INR' ? '₹' : '$';
 
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -153,27 +153,39 @@ export default function Dashboard() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <Card className="bg-brand-500 border-none text-white overflow-hidden relative">
+        <Card className={cn(
+          "border-none text-white overflow-hidden relative transition-all duration-500",
+          spendingPercentage < 50 ? "bg-brand-500 shadow-lg shadow-brand-500/20" :
+          spendingPercentage < 80 ? "bg-amber-500 shadow-lg shadow-amber-500/20" :
+          spendingPercentage < 100 ? "bg-orange-500 shadow-lg shadow-orange-500/20" :
+          "bg-gradient-to-br from-rose-600 to-rose-700 shadow-xl shadow-rose-500/20"
+        )}>
           <div className="relative z-10">
-            <p className="text-brand-100 text-sm font-medium mb-1 opacity-80 uppercase tracking-wider">Total Spending</p>
+            <p className="text-white/70 text-sm font-medium mb-1 uppercase tracking-wider">Total Spending</p>
             <h2 className="text-4xl font-display font-bold mb-6">
               <AnimatedNumber value={summary?.totalSpending ?? 0} precision={2} prefix={currencySymbol} />
             </h2>
             
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/10 rounded-2xl p-3 backdrop-blur-sm">
-                <div className="flex items-center gap-1.5 text-brand-100 text-xs font-medium mb-1">
-                  <ArrowDownRight className={cn("w-3 h-3", isOverBudget ? "text-rose-300" : "text-emerald-300")} />
-                  Budget Status
+              <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm border border-white/10">
+                <div className="flex items-center gap-1.5 text-white/60 text-[10px] font-bold uppercase tracking-widest mb-1">
+                  <ArrowDownRight className={cn(
+                    "w-3 h-3",
+                    spendingPercentage < 80 ? "text-emerald-300" :
+                    spendingPercentage < 100 ? "text-amber-200" : "text-rose-200"
+                  )} />
+                  Status
                 </div>
-                <div className="text-sm font-semibold">{isOverBudget ? 'Over Budget' : 'On Track'}</div>
+                <div className="text-sm font-bold">
+                  {spendingPercentage < 100 ? (spendingPercentage < 80 ? 'On Track' : 'Warning') : 'Over Budget'}
+                </div>
               </div>
-              <div className="bg-white/10 rounded-2xl p-3 backdrop-blur-sm">
-                <div className="flex items-center gap-1.5 text-brand-100 text-xs font-medium mb-1">
-                  <ArrowUpRight className="w-3 h-3 text-indigo-300" />
-                  Txn Count
+              <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm border border-white/10">
+                <div className="flex items-center gap-1.5 text-white/60 text-[10px] font-bold uppercase tracking-widest mb-1">
+                  <ArrowUpRight className="w-3 h-3 text-white/80" />
+                  Count
                 </div>
-                <div className="text-sm font-semibold">
+                <div className="text-sm font-bold">
                   <AnimatedNumber value={summary?.totalTransactions ?? 0} /> txns
                 </div>
               </div>
@@ -181,14 +193,14 @@ export default function Dashboard() {
           </div>
           
           <div className="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute -left-12 -bottom-12 w-32 h-32 bg-indigo-500/30 rounded-full blur-2xl" />
+          <div className="absolute -left-12 -bottom-12 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
         </Card>
       </motion.div>
 
       {/* Quick Actions */}
       <div className="flex gap-4">
         <Button 
-          className="flex-1 rounded-2xl h-14 font-semibold" 
+          className="flex-1 rounded-2xl h-14 font-bold shadow-lg shadow-brand-500/20"
           variant="primary"
           onClick={() => navigate('/transactions', { state: { openAdd: true } })}
         >

@@ -20,7 +20,7 @@ export default function Settings() {
   const [budget, setBudget] = useState(user?.properties?.monthlyBudget || '10000');
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const currency = user?.properties?.currency || 'USD';
+  const currency = user?.properties?.currency || 'INR';
 
   const handleUpdateBudget = async () => {
     setIsUpdating(true);
@@ -141,7 +141,7 @@ export default function Settings() {
         </div>
         <div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">{user?.username}</h2>
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-tight">{user?.email || (user?.properties?.gender === 'female' ? 'Female User' : 'Male User')}</p>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-tight">{user?.email || 'User Account'}</p>
           <button 
             id="edit-photo-btn"
             onClick={handleUpdatePhoto}
@@ -238,8 +238,8 @@ export default function Settings() {
       <div className="pt-12 pb-16">
         <div className="flex flex-col items-center">
           <Button
-            variant="danger"
-            className="w-full h-14 rounded-2xl gap-2 font-bold shadow-lg shadow-rose-500/10 mb-10 active:scale-[0.98] transition-transform"
+            variant="secondary"
+            className="w-full h-14 rounded-2xl gap-2 font-bold mb-10 active:scale-[0.98] transition-transform text-rose-500 bg-rose-50 border-rose-100 hover:bg-rose-100 dark:bg-rose-500/5 dark:border-rose-500/10 dark:hover:bg-rose-500/10"
             onClick={logout}
           >
             <LogOut className="w-5 h-5" /> Sign Out

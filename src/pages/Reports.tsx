@@ -25,7 +25,7 @@ export default function Reports() {
   const [comparisonData, setComparisonData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const currency = user?.properties?.currency || 'USD';
+  const currency = user?.properties?.currency || 'INR';
   const currencySymbol = currency === 'INR' ? '₹' : '$';
 
   const loadReport = useCallback(async () => {
@@ -90,7 +90,8 @@ export default function Reports() {
       const endpoint = formatType === 'excel'
         ? apiService.reports.exportExcel(user.userId)
         : apiService.reports.exportPdf(user.userId);
-      const filename = `report_${new Date().getTime()}.${formatType === 'excel' ? 'xlsx' : 'pdf'}`;
+      const monthName = format(new Date(), 'MMMM');
+      const filename = `${user.username}-backup-report-${monthName}.${formatType === 'excel' ? 'xlsx' : 'pdf'}`;
       await apiService.reports.downloadFile(endpoint, filename);
       showToast('Export successful', 'success');
     } catch (err) {
@@ -117,8 +118,9 @@ export default function Reports() {
     setIsResetting(true);
     try {
       const endpoint = apiService.reports.exportPdf(user.userId);
+      const monthName = format(new Date(), 'MMMM');
       await Promise.all([
-        apiService.reports.downloadFile(endpoint, `backup_${Date.now()}.pdf`).catch(e => console.warn('Backup failed', e)),
+        apiService.reports.downloadFile(endpoint, `${user.username}-backup-report-${monthName}.pdf`).catch(e => console.warn('Backup failed', e)),
         apiService.transactions.deleteAllForUser(user.userId),
         apiService.predictions.deleteAllForUser(user.userId)
       ]);
