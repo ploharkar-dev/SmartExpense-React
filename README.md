@@ -1,5 +1,9 @@
 # 💳 SmartExpense Tracker - Setup Guide
 
+### 🌐 Live Links
+- **Production Web App**: [https://yoursmartexpense.netlify.app/](https://yoursmartexpense.netlify.app/)
+- **Backend API Swagger**: [https://happy-charisma-production.up.railway.app/api/swagger-ui/index.html#/](https://happy-charisma-production.up.railway.app/api/swagger-ui/index.html#/)
+
 This application is built with **React 19**, **Vite**, **Tailwind CSS**, and **Motion**. It is designed to work as a mobile-first web application.
 
 ## 🚀 Local Setup Instructions
@@ -47,13 +51,13 @@ This frontend application is configured to connect to the **Spring Boot Backend*
 You don't actually need an APK to install this on your phone! This app is a **Progressive Web App (PWA)**, which means you can install it directly from your browser. It will look and feel like a native app (no browser tabs, home screen icon, splash screen).
 
 ### 🤖 For Android
-1. Open the [App URL](https://ais-dev-tw2g6yyok2roms7s723p42-731853488171.asia-east1.run.app) in **Google Chrome**.
+1. Open the [App URL](https://yoursmartexpense.netlify.app/) in **Google Chrome**.
 2. Tap the **three-dot menu** (⋮) at the top right.
 3. Select **"Install app"** or **"Add to Home screen"**.
 4. The SmartExpense icon will now appear on your home screen.
 
 ### 🍏 For iPhone (iOS)
-1. Open the [App URL](https://ais-dev-tw2g6yyok2roms7s723p42-731853488171.asia-east1.run.app) in **Safari**.
+1. Open the [App URL](https://yoursmartexpense.netlify.app/) in **Safari**.
 2. Tap the **Share** button (the square with an arrow pointing up).
 3. Scroll down and tap **"Add to Home Screen"**.
 
