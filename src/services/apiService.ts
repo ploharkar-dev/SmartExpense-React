@@ -12,7 +12,7 @@ import {
   ReportSummary 
 } from '../types/api';
 
-const API_BASE = 'http://localhost:8080/api';
+const API_BASE = 'https://happy-charisma-production.up.railway.app/api';
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = localStorage.getItem('jwtToken');
